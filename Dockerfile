@@ -6,7 +6,7 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["AmazonReviewGenerator.csproj", "."]
+COPY ["src/AmazonReviewGenerator.csproj", "."]
 RUN dotnet restore "./AmazonReviewGenerator.csproj"
 COPY . .
 WORKDIR "/src/."
