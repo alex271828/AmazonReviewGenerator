@@ -8,7 +8,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["src/AmazonReviewGenerator.csproj", "."]
 RUN dotnet restore "./AmazonReviewGenerator.csproj"
-COPY . .
+COPY src .
 WORKDIR "/src/."
 RUN dotnet build "AmazonReviewGenerator.csproj" -c Release -o /app/build
 
