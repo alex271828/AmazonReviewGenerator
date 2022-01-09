@@ -36,6 +36,12 @@ namespace AmazonReviewGenerator.review
                 }
             }
 
+            // add remaining text
+            if (sb.Length > 0)
+            {
+                words.Add(sb.ToString().Trim());
+            }
+
             return words;
         }
 
@@ -50,7 +56,7 @@ namespace AmazonReviewGenerator.review
 
             StringBuilder sb = new StringBuilder();
 
-            // TODO: what about "Ms. Jane" ?
+            // TODO: what about "Ms. Jane" and such ?
 
             //var reviewTextL = reviewText.ToLower();
             foreach (var c in text.ToCharArray())
@@ -72,6 +78,7 @@ namespace AmazonReviewGenerator.review
                 }
             }
 
+            // add remaining text
             if (sb.Length > 0)
             {
                 sentences.Add(sb.ToString().Trim());
