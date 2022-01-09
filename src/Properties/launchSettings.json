@@ -12,7 +12,7 @@
     "AmazonReviewGenerator": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "API/generate",
+      "launchUrl": "userFriendlyFrontEnd.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

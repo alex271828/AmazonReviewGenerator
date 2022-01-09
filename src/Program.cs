@@ -16,4 +16,6 @@ reviewGenerator.Init("data");
 
 app.MapGet("/API/generate", () => { return reviewGenerator.GenerateReview(); });
 
+app.UseStaticFiles();
+
 app.Run();

@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<html>
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <h1>{{reviewerName}}</h1>
+        <br>
+        <h1>{{summary}}</h1>
+        <br>
+        <h1>{{reviewText}}</h1>
+    </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope, $http) {
+            $http.get("API/generate")
+                .then(function (response) {
+                    $scope.reviewerName = response.data.reviewerName;
+                    $scope.summary = response.data.summary;
+                    $scope.reviewText = response.data.reviewText;
+                });
+        });
+    </script>
+
+</body>
+</html>
