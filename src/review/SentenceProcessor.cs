@@ -4,13 +4,18 @@ namespace AmazonReviewGenerator.review
 {
     public class SentenceProcessor
     {
-        public List<string> GetWords(string sentence)
+        /// <summary>
+        /// Get separate words from text.
+        /// </summary>
+        /// <param name="reviewText"></param>
+        /// <returns></returns>
+        public List<string> GetWords(string text)
         {
             List<string> words = new List<string>();
 
             StringBuilder sb = new StringBuilder();
 
-            foreach (var c in sentence.ToCharArray())
+            foreach (var c in text.ToCharArray())
             {
                 if (char.IsLetter(c))
                 {
@@ -34,7 +39,12 @@ namespace AmazonReviewGenerator.review
             return words;
         }
 
-        public List<string> GetSentences(string reviewText)
+        /// <summary>
+        /// Get separate sentences from text.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public List<string> GetSentences(string text)
         {
             List<string> sentences = new List<string>();
 
@@ -43,7 +53,7 @@ namespace AmazonReviewGenerator.review
             // TODO: what about "Ms. Jane" ?
 
             //var reviewTextL = reviewText.ToLower();
-            foreach (var c in reviewText.ToCharArray())
+            foreach (var c in text.ToCharArray())
             {
                 if (char.IsLetter(c) || char.IsWhiteSpace(c))
                 {
@@ -55,11 +65,16 @@ namespace AmazonReviewGenerator.review
                     {
                         if (sb.Length > 0)
                         {
-                            sentences.Add(sb.ToString());
+                            sentences.Add(sb.ToString().Trim());
                             sb.Clear();
                         }
                     }
                 }
+            }
+
+            if (sb.Length > 0)
+            {
+                sentences.Add(sb.ToString().Trim());
             }
 
             return sentences;

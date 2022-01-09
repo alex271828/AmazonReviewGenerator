@@ -15,10 +15,27 @@ namespace AmazonReviewGenerator.review.Tests
         public void GetSentencesTest()
         {
             var sentenceProcessor = new SentenceProcessor();
-
-            var results = sentenceProcessor.GetSentences("aaa bbb. ccc dddd. gggg.");
-
-            Assert.AreEqual(results.Count, 3);
+            {
+                var results = sentenceProcessor.GetSentences("aaa bbb. ccc dddd. gggg");
+                Assert.AreEqual(results.Count, 3);
+                Assert.AreEqual(results[0], "aaa bbb");
+                Assert.AreEqual(results[1], "ccc dddd");
+                Assert.AreEqual(results[2], "gggg");
+            }
+            {
+                var results = sentenceProcessor.GetSentences("aaa bbb; ccc dddd. gggg");
+                Assert.AreEqual(results.Count, 3);
+                Assert.AreEqual(results[0], "aaa bbb");
+                Assert.AreEqual(results[1], "ccc dddd");
+                Assert.AreEqual(results[2], "gggg");
+            }
+            {
+                var results = sentenceProcessor.GetSentences("aaa bbb. ccc dddd: gggg");
+                Assert.AreEqual(results.Count, 3);
+                Assert.AreEqual(results[0], "aaa bbb");
+                Assert.AreEqual(results[1], "ccc dddd");
+                Assert.AreEqual(results[2], "gggg");
+            }
         }
     }
 }
