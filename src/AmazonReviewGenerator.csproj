@@ -18,6 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="wwwroot\userFriendlyFrontEnd.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="data\Appliances_5.pdo">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
