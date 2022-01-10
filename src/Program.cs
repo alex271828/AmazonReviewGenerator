@@ -12,6 +12,7 @@ var app = builder.Build();
 
 var reviewGenerator = new AmazonReviewGenerator.review.ReviewGenerator();
 
+// init our AI using "data" folder
 reviewGenerator.Init("data");
 
 app.MapGet("/API/generate", () => { return reviewGenerator.GenerateReview(); });

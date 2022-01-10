@@ -4,12 +4,17 @@ namespace AmazonReviewGenerator.review
 {
     public class ReviewGenerator
     {
+        /// <summary>
+        /// Initialize our AI.
+        /// </summary>
+        /// <param name="folder"></param>
         public void Init(string folder)
         {
             // check for exiting pdo files
             var pdoFiles = System.IO.Directory.GetFiles(folder, "*.pdo", SearchOption.AllDirectories);
             if (pdoFiles.Length > 0)
             {
+                // we can handle only one file. For now.
                 _markov = new Markov(pdoFiles[0]);
             }
             else
@@ -19,26 +24,21 @@ namespace AmazonReviewGenerator.review
 
                 if (jsonFiles.Length > 0)
                 {
+                    // create new pdo file
                     _markov = new Markov(Path.Combine(folder, $"{DateTime.Now.ToString("yyyyMMddHHmmss")}.pdo"));
 
                     var amazonReviewParser = new AmazonReviewParser();
-                    var sentenceProcessor = new SentenceProcessor();
 
                     foreach (var jsonFile in jsonFiles)
                     {
+                        // get reviews from file
                         var reviews = amazonReviewParser.Parse(jsonFile);
 
-                        foreach (var review in reviews)
+                        // teach our AI using review objects
+                        amazonReviewParser.ProcessReviews(reviews, (sentence) =>
                         {
-                            if (string.IsNullOrWhiteSpace(review.reviewText)) continue;
-
-                            var sentences = sentenceProcessor.GetSentences(review.reviewText);
-
-                            foreach (var sentence in sentences)
-                            {
-                                _markov.AddToChain(sentence);
-                            }
-                        }
+                            _markov.AddToChain(sentence);
+                        });
                     }
                 }
             }
@@ -57,7 +57,7 @@ namespace AmazonReviewGenerator.review
             return new AmazonReviewGenerator.review.ReviewModel
                (
                    Random.Shared.Next(1, 6),
-                   "reviewerName",
+                   "reviewerName", // TODO: get randon name from the list of names
                    _markov.Generate(Random.Shared.Next(10, 100)),
                    _markov.Generate(Random.Shared.Next(3, 20))
                );

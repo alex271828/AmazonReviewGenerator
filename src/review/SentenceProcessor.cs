@@ -17,12 +17,13 @@ namespace AmazonReviewGenerator.review
 
             foreach (var c in text.ToCharArray())
             {
-                if (char.IsLetter(c))
+                if (char.IsLetter(c)) // for now we only care about letters
                 {
                     sb.Append(c);
                 }
                 else
                 {
+                    // not a letter, see if we have a word
                     if (sb.Length > 0)
                     {
                         words.Add(sb.ToString());
@@ -67,6 +68,7 @@ namespace AmazonReviewGenerator.review
                 }
                 else
                 {
+                    // not sure about which characters can separate sentences
                     if (c == '.' || c == ';' || c == ':')
                     {
                         if (sb.Length > 0)
